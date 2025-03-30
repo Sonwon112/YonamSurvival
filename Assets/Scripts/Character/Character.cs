@@ -11,6 +11,11 @@ public class Character : MonoBehaviour
     private Rigidbody2D rbCharacter;
     private Animator animator;
 
+    // 상호작용
+    private bool canInteract;
+    private Interactable interactTarget;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,5 +48,23 @@ public class Character : MonoBehaviour
         
         animator.SetFloat("speed", absHor + absVert);
 
+        if (canInteract)
+        {
+            if (Input.GetButtonDown("MoveUpper"))
+            {
+                interactTarget.Interact(gameObject, "up");
+            }else if (Input.GetButtonDown("MoveUnder"))
+            {
+                interactTarget.Interact(gameObject, "down");
+            }
+        }
+
     }
+
+    public void setCanInteract(bool canInteract, Interactable interactTarget)
+    {
+        this.canInteract = canInteract;
+        this.interactTarget = interactTarget;
+    }
+
 }
