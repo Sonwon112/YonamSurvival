@@ -58,6 +58,7 @@ public class Character : MonoBehaviour
         
         animator.SetFloat("speed", absHor + absVert);
 
+        // 구르기
         if (Input.GetButtonDown("Jump") && !isRoll)
         {
             //isRoll = true;
@@ -65,8 +66,10 @@ public class Character : MonoBehaviour
             Invoke("setRollTrue", 0.1f);
         }
 
+        // 상호작용
         if (canInteract)
         {
+            // 층수 이동
             if (Input.GetButtonDown("MoveUpper"))
             {
                 interactTarget.Interact(gameObject, "up");
@@ -78,17 +81,28 @@ public class Character : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 상호작용 물체 접근 / 탈출 시 상호작용 상태 변경
+    /// </summary>
+    /// <param name="canInteract"></param>
+    /// <param name="interactTarget"></param>
     public void setCanInteract(bool canInteract, Interactable interactTarget)
     {
         this.canInteract = canInteract;
         this.interactTarget = interactTarget;
     }
 
+    /// <summary>
+    /// 구르기 시 거리 이동을 위한 구르기 상태를 True로 변환
+    /// </summary>
     public void setRollTrue()
     {
         isRoll = true;
     }
 
+    /// <summary>
+    /// 구르기가 끝난 상태에서 구르기 상태를 False로 변환
+    /// </summary>
     public void setRollFalse()
     {
         isRoll = false;
