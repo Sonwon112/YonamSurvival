@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
     private Rigidbody2D rbCharacter;
     private Animator animator;
 
+    public Vector2 facingDirection = Vector2.right;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
