@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, TakeDamage
 {
     [Header("State Variable")]
     [SerializeField] private float speed = 3.0f;
@@ -12,10 +12,11 @@ public class Character : MonoBehaviour
     private Rigidbody2D rbCharacter;
     private Animator animator;
 
-    
+    // 플레이어상태
     private float direction = 1;
     private bool isRoll = false;
-
+    private float HP = 3f;
+    
 
     // 상호작용
     private bool canInteract;
@@ -29,19 +30,18 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         float isRun = Input.GetAxis("Run");
         float tmpSpeed = isRun > 0 ? runSpeed : speed;
 
-        animator.SetFloat("RunSpeed",tmpSpeed);
+        animator.SetFloat("RunSpeed", tmpSpeed);
 
-        if(horizontal != 0)
+        if (horizontal != 0)
         {
-            direction= horizontal < 0 ? -1 : 1;
+            direction = horizontal < 0 ? -1 : 1;
             transform.localScale = new Vector3(direction, 1, 1);
         }
 
@@ -54,10 +54,16 @@ public class Character : MonoBehaviour
 
         //Debug.Log(isRoll);
 
-        rbCharacter.linearVelocity = new Vector2(horizontal* movingSpeed + currRollPow, vertical* movingSpeed);
-        
+        rbCharacter.linearVelocity = new Vector2(horizontal * movingSpeed + currRollPow, vertical * movingSpeed);
+
         animator.SetFloat("speed", absHor + absVert);
 
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         // 구르기
         if (Input.GetButtonDown("Jump") && !isRoll)
         {
@@ -65,7 +71,6 @@ public class Character : MonoBehaviour
             animator.SetBool("roll", true);
             Invoke("setRollTrue", 0.1f);
         }
-
         // 상호작용
         if (canInteract)
         {
@@ -109,4 +114,26 @@ public class Character : MonoBehaviour
         animator.SetBool("roll", false);
     }
 
+    /// <summary>
+    /// 데미지를 받았을 때 호출되는 함수
+    /// </summary>
+    /// <param name="damage"></param>
+    public void takeDamage(float damage)
+    {
+        HP -= damage;
+        if (HP < 0)
+        {
+            HP = 0;
+            die();
+        }
+        
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void die()
+    {
+
+    }
 }

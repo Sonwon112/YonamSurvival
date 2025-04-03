@@ -3,7 +3,14 @@ using UnityEngine;
 
 public class subjectMath : Skill
 {
+    [Header("UI")]
+    [SerializeField] private Sprite cardSprite;
+    [SerializeField] private string cardDescript;
+
     
+    private bool isAttack = true;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +26,6 @@ public class subjectMath : Skill
 
     public override void Attack()
     {
-
-
+        
     }
 }
