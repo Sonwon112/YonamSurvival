@@ -4,12 +4,19 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
+    [Header("Status")]
+    [SerializeField] protected int skillId;
     [Header("Step Content")]
     [SerializeField] protected GameObject[] stepEffects;
     [SerializeField ]protected float[] stepDamage;
     [SerializeField] protected float[] stepTerm;
 
-    protected int step = 1;
+    [Header("UI")]
+    [SerializeField] private Sprite skillProfile;
+    [SerializeField] private string skillDescript;
+
+    protected bool startAttack = false;
+    protected int step = 0;
 
     private float currDamage = 0f;
     private float currTerm = 0f;
@@ -17,10 +24,14 @@ public abstract class Skill : MonoBehaviour
     private float addtionalDamage = 0f;
     private float addtionalTerm = 0f;
 
+    public Sprite getSkillProfile() { return skillProfile; }
+    public string getSkillDescript() { return skillDescript; }
+
     /// <summary>
     /// 공격하는 함수
     /// </summary>
     public virtual void Attack() {}
+    public virtual void StopAttack() { }
 
     /// <summary>
     /// 버프 효과로 단계상승이 아닌 기본 데미지가 상승
@@ -38,4 +49,14 @@ public abstract class Skill : MonoBehaviour
     {
         addtionalDamage -= term;
     }
+
+    /// <summary>
+    /// 공격 시작
+    /// </summary>
+    public void StartAttack()
+    {
+        startAttack = true;
+    }
+
+    
 }

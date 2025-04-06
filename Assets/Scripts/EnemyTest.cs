@@ -18,6 +18,6 @@ public class EnemyTest : MonoBehaviour
     {
         float angle = Quaternion.FromToRotation(Vector3.up, Player.transform.position - transform.position).eulerAngles.z;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-        rb.linearVelocity =  
+        rb.linearVelocity = transform.up * velocity;
     }
 }

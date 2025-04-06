@@ -5,8 +5,8 @@ public class Door : MonoBehaviour, Interactable
 {
 
     [SerializeField] private GameObject guideText;
-    [SerializeField] private Transform UpperPos;
-    [SerializeField] private Transform UnderPos;
+    [SerializeField] private Transform upperPos;
+    [SerializeField] private Transform underPos;
 
     /// <summary>
     /// 문 상호작용시 층 수 이동을 위한 함수
@@ -17,8 +17,8 @@ public class Door : MonoBehaviour, Interactable
     {
         if (msg.Equals("up"))
         {
-            if (UpperPos != null) {
-                Player.transform.position = UpperPos.position;
+            if (upperPos != null) {
+                Player.transform.position = upperPos.position;
             }
             else
             {
@@ -27,9 +27,9 @@ public class Door : MonoBehaviour, Interactable
         }
         else if(msg.Equals("down"))
         {
-            if (UnderPos != null)
+            if (underPos != null)
             {
-                Player.transform.position = UnderPos.position;
+                Player.transform.position = underPos.position;
             }
             else
             {

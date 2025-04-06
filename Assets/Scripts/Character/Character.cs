@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class Character : MonoBehaviour, TakeDamage
 {
@@ -17,11 +18,20 @@ public class Character : MonoBehaviour, TakeDamage
     private bool isRoll = false;
     private float HP = 3f;
     
+    // 스킬
+    private Skill[] haveSkill = new Skill[5];
+    private GameObject[] skillInstance = new GameObject[5];
+    private int currIndex = 0;
 
     // 상호작용
     private bool canInteract;
     private Interactable interactTarget;
 
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.back, 3);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -130,10 +140,22 @@ public class Character : MonoBehaviour, TakeDamage
     }
 
     /// <summary>
-    /// 
+    /// HP가 0이 되었을 때 호출
     /// </summary>
     public void die()
     {
 
+    }
+
+    public Skill[] AppendSkill(Skill skill)
+    {
+        GameObject instance = Instantiate(skill.gameObject,transform);
+        Skill instancSkill = instance.GetComponent<Skill>();
+        instancSkill.StartAttack();
+        
+        haveSkill[currIndex] = instancSkill;
+        skillInstance[currIndex++] = instance;
+
+        return haveSkill;
     }
 }
