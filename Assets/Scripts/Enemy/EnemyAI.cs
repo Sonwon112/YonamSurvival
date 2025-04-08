@@ -7,26 +7,33 @@ public class EnemyAI : MonoBehaviour, EnemyInterface
     public int HP { get; set; }
     public float MoveSpeed { get; set; }
 
-    private Transform playerTransform;      // ÇÃ·¹ÀÌ¾îÀÇ Transform
-    public float moveSpeed = 0.7f;          // ÀÌµ¿ ¼Óµµ
+    private Transform playerTransform;      // í”Œë ˆì´ì–´ì˜ Transform
+    public float moveSpeed = 0.7f;          // ì´ë™ ì†ë„
 
-    private Vector2 randomOffset;          // ·£´ı ÀÌµ¿À» À§ÇÑ ¿ÀÇÁ¼Â
-    private float randomness = 0.3f;       // ·£´ı ¿òÁ÷ÀÓÀÇ Á¤µµ
+    private Vector2 randomOffset;          // ëœë¤ ì´ë™ì„ ìœ„í•œ ì˜¤í”„ì…‹
+    private float randomness = 0.3f;       // ëœë¤ ì›€ì§ì„ì˜ ì •ë„
+
+    private Rigidbody2D myRigid;
+
+
 
     private void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindWithTag("Player").transform;
         HP = 100;
         MoveSpeed = moveSpeed;
+        myRigid = GetComponent<Rigidbody2D>();
+        InvokeRepeating(nameof(UpdateRandomOffset), 0f, 0.3f);  // ëœë¤ ì´ë™ ê°„ê²© ì„¤ì •
+      
 
-        InvokeRepeating(nameof(UpdateRandomOffset), 0f, 0.3f);  // ·£´ı ÀÌµ¿ °£°İ ¼³Á¤
     }
 
     private void Update()
     {
-        Move();  // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ÀÌµ¿
+        Move();  // ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì´ë™
     }
 
+    // ìì—°ìŠ¤ëŸ¬ìš´ ì›€ì§ì„ 
     private void UpdateRandomOffset()
     {
         randomOffset = UnityEngine.Random.insideUnitCircle * randomness;
@@ -37,13 +44,20 @@ public class EnemyAI : MonoBehaviour, EnemyInterface
         if (playerTransform != null)
         {
             Vector2 targetPosition = (Vector2)playerTransform.position + randomOffset;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime);
+            Vector2 forPos = targetPosition - (Vector2)transform.position;
+
+            if (forPos.magnitude > 0.05f)
+            {
+                Vector2 currentPosition = transform.position; // Vector2ë¡œ ì²˜ë¦¬
+                myRigid.MovePosition(currentPosition + forPos.normalized * MoveSpeed * Time.fixedDeltaTime);
+            }
+
         }
     }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Àû °ø°İ!");
+        Debug.Log($"ê¸°ë³¸ëª¹ í”¼í•´: {damage} / ë‚¨ì€ HP: {HP}");
         HP -= damage;
         if (HP <= 0)
         {
@@ -53,8 +67,20 @@ public class EnemyAI : MonoBehaviour, EnemyInterface
 
     private void Die()
     {
-        Destroy(gameObject);  // ÀûÀÌ Á×À¸¸é »èÁ¦
+        Destroy(gameObject);  // ì ì´ ì£½ìœ¼ë©´ ì‚­ì œ
     }
 
-   
+    public void Attack(int atDamage)
+    {
+        Debug.Log($"Lv1 ê¸°ë³¸ëª¹ì´ {atDamage}ì˜ ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.");
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Attack(5);
+        }
+    }
 }

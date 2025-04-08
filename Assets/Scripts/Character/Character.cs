@@ -8,10 +8,13 @@ public class Character : MonoBehaviour
     [SerializeField] private float runSpeed = 5.5f;
     [SerializeField] private float diagonalTmp = 0.7f;
 
+   
+
     private Rigidbody2D rbCharacter;
     private Animator animator;
 
     public Vector2 facingDirection = Vector2.right;
+    public float PlayerHp = 100f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,4 +49,6 @@ public class Character : MonoBehaviour
         animator.SetFloat("speed", absHor + absVert);
 
     }
+
+
 }

@@ -6,4 +6,5 @@ public interface EnemyInterface
     float MoveSpeed { get; set; }
     void Move();
     void TakeDamage(int damage);
+    void Attack(int atDamage);
 }
