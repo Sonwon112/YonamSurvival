@@ -150,10 +150,10 @@ public class Character : MonoBehaviour, TakeDamage
     public Skill[] AppendSkill(Skill skill)
     {
         GameObject instance = Instantiate(skill.gameObject,transform);
-        Skill instancSkill = instance.GetComponent<Skill>();
-        instancSkill.StartAttack();
+        Skill instanceSkill = instance.GetComponent<Skill>();
+        instanceSkill.StartAttack();
         
-        haveSkill[currIndex] = instancSkill;
+        haveSkill[currIndex] = instanceSkill;
         skillInstance[currIndex++] = instance;
 
         return haveSkill;

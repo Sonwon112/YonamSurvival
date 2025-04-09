@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class EnemyTest : MonoBehaviour
+public class EnemyTest : MonoBehaviour, TakeDamage
 {
     public GameObject Player;
     public float velocity;
+    public float HP=2f;
 
     private Rigidbody2D rb;
 
@@ -19,5 +20,10 @@ public class EnemyTest : MonoBehaviour
         float angle = Quaternion.FromToRotation(Vector3.up, Player.transform.position - transform.position).eulerAngles.z;
         transform.rotation = Quaternion.Euler(0, 0, angle);
         rb.linearVelocity = transform.up * velocity;
+    }
+
+    public void takeDamage(float damage)
+    {
+        HP -= damage;
     }
 }

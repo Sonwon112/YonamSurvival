@@ -6,10 +6,12 @@ public class DamageComponet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag.Equals("Player") || collision.gameObject.tag.Equals("Player"))
+        if(collision.gameObject.tag.Equals("Player") || collision.gameObject.tag.Equals("Enemy"))
         {
             TakeDamage target = collision.gameObject.GetComponent<TakeDamage>();
+            target.takeDamage(damage);
         }
+        Destroy(gameObject);
     }
 
     public void setDamage(float damage) { 
