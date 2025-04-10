@@ -672,7 +672,7 @@ Transform:
   m_GameObject: {fileID: 398869159}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.87, y: 1.38, z: -0.6982628}
+  m_LocalPosition: {x: 1.39, y: 1.74, z: -0.6982628}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 277025668}
-  skillCooldown: 1
+  skillCooldown: 10
   projectileSpeed: 4.5
 --- !u!1001 &454688782
 PrefabInstance:
@@ -1820,7 +1820,7 @@ Transform:
   m_GameObject: {fileID: 926598573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.87, y: 1.18, z: -0.6982628}
+  m_LocalPosition: {x: 5.27, y: 3.68, z: -0.6982628}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2389,7 +2389,7 @@ Transform:
   m_GameObject: {fileID: 1486937527}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 1.27, z: -0.6982628}
+  m_LocalPosition: {x: 2.69, y: 4.07, z: -0.6982628}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

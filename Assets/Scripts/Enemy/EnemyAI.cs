@@ -39,21 +39,37 @@ public class EnemyAI : MonoBehaviour, EnemyInterface
         randomOffset = UnityEngine.Random.insideUnitCircle * randomness;
     }
 
+    //public void Move()
+    //{
+    //    if (playerTransform != null)
+    //    {
+    //        Vector2 targetPosition = (Vector2)playerTransform.position + randomOffset;
+    //        Vector2 forPos = targetPosition - (Vector2)transform.position;
+
+    //        if (forPos.magnitude > 0.05f)
+    //        {
+    //            Vector2 currentPosition = transform.position; // Vector2로 처리
+    //            myRigid.MovePosition(currentPosition + forPos.normalized * MoveSpeed * Time.fixedDeltaTime);
+    //        }
+
+    //    }
+    //}
+
+
     public void Move()
     {
-        if (playerTransform != null)
-        {
-            Vector2 targetPosition = (Vector2)playerTransform.position + randomOffset;
-            Vector2 forPos = targetPosition - (Vector2)transform.position;
+        if (playerTransform == null || myRigid == null) return;
 
-            if (forPos.magnitude > 0.05f)
-            {
-                Vector2 currentPosition = transform.position; // Vector2로 처리
-                myRigid.MovePosition(currentPosition + forPos.normalized * MoveSpeed * Time.fixedDeltaTime);
-            }
+        Vector2 targetPosition = (Vector2)playerTransform.position + randomOffset;
+        Vector2 dir = (targetPosition - (Vector2)transform.position).normalized;
 
-        }
+        // 자연스러운 물리 기반 이동
+        myRigid.linearVelocity = dir * MoveSpeed;
     }
+
+
+
+
 
     public void TakeDamage(int damage)
     {

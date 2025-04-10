@@ -52,10 +52,8 @@ public class TankEnemy : MonoBehaviour, EnemyInterface
     {
         if (playerTransform == null || myRigid == null) return;
 
-        Vector2 dir = (playerTransform.position - transform.position).normalized;
-        Vector2 newPos = (Vector2)transform.position + dir * MoveSpeed * Time.fixedDeltaTime;
-
-        myRigid.MovePosition(newPos);
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        myRigid.linearVelocity = direction * MoveSpeed;
     }
 
 
@@ -64,6 +62,12 @@ public class TankEnemy : MonoBehaviour, EnemyInterface
     {
         // 공격 중이라는 상태로 설정
         isAttacking = true;
+
+
+        // 공격 시작시 움직임을 멈추고 저지불가
+        myRigid.linearVelocity = Vector2.zero;
+        myRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+
 
         // 공격 준비 시간
         Debug.Log("탱커 적: 공격 준비 중...");
@@ -90,6 +94,7 @@ public class TankEnemy : MonoBehaviour, EnemyInterface
 
         // 쿨타임
         yield return new WaitForSeconds(attackCooldown);
+        myRigid.constraints = RigidbodyConstraints2D.FreezeRotation; // 스킬이 끝나면 저지불가 풀림
         isAttacking = false;
     }
 

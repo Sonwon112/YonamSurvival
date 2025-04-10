@@ -62,9 +62,12 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface
         if (playerTransform != null)
         {
             Vector2 targetPosition = (Vector2)playerTransform.position + randomOffset;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime);
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+
+            rb.linearVelocity = direction * MoveSpeed;
         }
     }
+
 
 
     // 돌진 스킬
