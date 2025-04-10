@@ -14,9 +14,10 @@ public abstract class Skill : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Sprite skillProfile;
     [SerializeField] private string skillDescript;
+    [SerializeField] protected int step = 0;
 
     protected bool startAttack = false;
-    protected int step = 0;
+    
 
     private float currDamage = 0f;
     private float currTerm = 0f;

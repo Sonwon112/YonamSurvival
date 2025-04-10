@@ -25,5 +25,9 @@ public class EnemyTest : MonoBehaviour, TakeDamage
     public void takeDamage(float damage)
     {
         HP -= damage;
+
+        if (HP < 0) {
+            Destroy(gameObject);
+        }
     }
 }

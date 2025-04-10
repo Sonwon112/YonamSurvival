@@ -51,6 +51,9 @@ public class subjectMath : Skill
         Debug.Log("수학 연산자 공격");
         GameObject effect = Instantiate(stepEffects[step], transform.position, Quaternion.identity);
         Rigidbody2D rb = effect.GetComponent<Rigidbody2D>();
+        DamageComponet damageComponet = effect.GetComponent<DamageComponet>();
+        damageComponet?.setDamage(stepDamage[step]);
+        damageComponet?.setTarget("Enemy");
 
         GameObject nearEnemy = findNearEnemy();
         if(nearEnemy == null)

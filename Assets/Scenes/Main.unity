@@ -298,6 +298,7 @@ MonoBehaviour:
   stepTerm: []
   skillProfile: {fileID: 0}
   skillDescript: 
+  step: 0
   throwPow: 5
 --- !u!4 &206824902
 Transform:
@@ -2409,7 +2410,7 @@ GameObject:
   - component: {fileID: 1282861221}
   m_Layer: 6
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2428,6 +2429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 438765348}
   velocity: 0.4
+  HP: 2
 --- !u!212 &1282861217
 SpriteRenderer:
   m_ObjectHideFlags: 0

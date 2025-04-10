@@ -4,17 +4,26 @@ public class DamageComponet : MonoBehaviour
 {
     [SerializeField] private float damage = 1f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private string target = "Enemy";
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag.Equals("Player") || collision.gameObject.tag.Equals("Enemy"))
+        Debug.Log(collision.name);
+        if (collision.gameObject.tag.Equals(target))
         {
             TakeDamage target = collision.gameObject.GetComponent<TakeDamage>();
             target.takeDamage(damage);
+
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
     }
 
     public void setDamage(float damage) { 
         this.damage = damage;
+    }
+
+    public void setTarget(string target) { 
+        this.target = target;
     }
 }
