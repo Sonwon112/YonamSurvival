@@ -469,3 +469,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/unity,visualstudio
 
 **/Sprites
+/Assets/TextMesh Pro/
+/Assets/Font/
