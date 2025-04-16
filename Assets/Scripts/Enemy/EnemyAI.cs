@@ -2,9 +2,9 @@ using System;
 using TMPro.Examples;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour, EnemyInterface
+public class EnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 {
-    public int HP { get; set; }
+    public float HP { get; set; }
     public float MoveSpeed { get; set; }
 
     private Transform playerTransform;      // 플레이어의 Transform
@@ -71,7 +71,7 @@ public class EnemyAI : MonoBehaviour, EnemyInterface
 
 
 
-    public void TakeDamage(int damage)
+    public void takeDamage(float damage)
     {
         Debug.Log($"기본몹 피해: {damage} / 남은 HP: {HP}");
         HP -= damage;

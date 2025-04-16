@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ChargingEnemyAI : MonoBehaviour, EnemyInterface
+public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 {
-    public int HP { get; set; }
+    public float HP { get; set; }
     public float MoveSpeed { get; set; }
 
     [Header("기본 이동 설정")]
@@ -91,7 +91,7 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface
         rb.linearVelocity = Vector2.zero;
     }
 
-    public void TakeDamage(int damage)
+    public void takeDamage(float damage)
     {
 
         Debug.Log($"중간몹 피해: {damage} / 남은 HP: {HP}");

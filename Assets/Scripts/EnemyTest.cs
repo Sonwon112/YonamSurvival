@@ -1,0 +1,36 @@
+using UnityEngine;
+
+public class EnemyTest : MonoBehaviour, TakeDamage
+{
+    /// <summary>
+    /// 테스트 용 코드
+    /// </summary>
+    public GameObject Player;
+    public float velocity;
+    public float HP=2f;
+
+    private Rigidbody2D rb;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float angle = Quaternion.FromToRotation(Vector3.up, Player.transform.position - transform.position).eulerAngles.z;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+        rb.linearVelocity = transform.up * velocity;
+    }
+
+    public void takeDamage(float damage)
+    {
+        HP -= damage;
+
+        if (HP < 0) {
+            Destroy(gameObject);
+        }
+    }
+}
