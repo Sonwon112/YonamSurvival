@@ -10,8 +10,11 @@ public class Character : MonoBehaviour, TakeDamage
     [SerializeField] private float diagonalTmp = 0.7f;
     [SerializeField] private float rollPow = 1f;
 
+   
+
     private Rigidbody2D rbCharacter;
     private Animator animator;
+
 
     // 플레이어상태
     private float direction = 1;
@@ -158,4 +161,6 @@ public class Character : MonoBehaviour, TakeDamage
 
         return haveSkill;
     }
+
+
 }
