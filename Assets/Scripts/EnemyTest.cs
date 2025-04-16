@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour, TakeDamage
 {
+    /// <summary>
+    /// 테스트 용 코드
+    /// </summary>
     public GameObject Player;
     public float velocity;
     public float HP=2f;

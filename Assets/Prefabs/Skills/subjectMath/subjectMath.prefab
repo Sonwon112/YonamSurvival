@@ -50,13 +50,14 @@ MonoBehaviour:
   - {fileID: 6596994688967133525, guid: 44c00aaf9ac8e344fa0e544bd6523a0d, type: 3}
   - {fileID: 6917157047447996150, guid: b01e753c9ca4d7b45bd9f54fb7d178a1, type: 3}
   stepDamage:
-  - 1
-  - 1.2
-  - 1.5
+  - 10
+  - 20
+  - 30
   stepTerm:
   - 3
   - 3
   - 3
   skillProfile: {fileID: 21300000, guid: a8d73cb38c30205498e953520bb555e8, type: 3}
   skillDescript: "\uC218\uD559 \uACF5\uC2DD\uC744 \uC774\uC6A9\uD55C \uACF5\uACA9"
+  step: 0
   throwPow: 5

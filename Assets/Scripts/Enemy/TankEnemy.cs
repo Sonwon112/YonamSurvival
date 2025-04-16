@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class TankEnemy : MonoBehaviour, EnemyInterface
+public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 {
-    public int HP { get; set; }
+    public float HP { get; set; }
     public float MoveSpeed { get; set; }
 
     [Header("탱커 설정")]
@@ -98,7 +98,7 @@ public class TankEnemy : MonoBehaviour, EnemyInterface
         isAttacking = false;
     }
 
-    public void TakeDamage(int damage)
+    public void takeDamage(float damage)
     {
         HP -= damage;
         Debug.Log($"탱커 피해: {damage} / 남은 HP: {HP}");

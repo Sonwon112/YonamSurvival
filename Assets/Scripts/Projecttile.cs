@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    /// <summary>
+    /// 테스트용 코드
+    /// </summary>
     private Vector2 moveDirection;
     private float moveSpeed;
     public int damage = 20;
@@ -26,7 +29,7 @@ public class Projectile : MonoBehaviour
         {
             EnemyInterface enemy = collision.GetComponent<EnemyInterface>();
             if (enemy != null)
-                enemy.TakeDamage(damage);
+                //enemy.TakeDamage(damage);
 
             Destroy(gameObject);
         }
