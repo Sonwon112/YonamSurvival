@@ -50,9 +50,9 @@ MonoBehaviour:
   - {fileID: 6596994688967133525, guid: 44c00aaf9ac8e344fa0e544bd6523a0d, type: 3}
   - {fileID: 6917157047447996150, guid: b01e753c9ca4d7b45bd9f54fb7d178a1, type: 3}
   stepDamage:
-  - 10
-  - 20
   - 30
+  - 50
+  - 100
   stepTerm:
   - 3
   - 3

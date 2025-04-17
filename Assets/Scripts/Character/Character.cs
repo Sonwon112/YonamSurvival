@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 
@@ -10,6 +11,12 @@ public class Character : MonoBehaviour, TakeDamage
     [SerializeField] private float diagonalTmp = 0.7f;
     [SerializeField] private float rollPow = 1f;
 
+    [Header("Speed buff Variable")]
+    private float buffSpeed = 3.0f;
+    private float buffRunSpeed = 5.5f;
+    private Coroutine speedBoostCoroutine;
+
+
    
 
     private Rigidbody2D rbCharacter;
@@ -19,7 +26,9 @@ public class Character : MonoBehaviour, TakeDamage
     // 플레이어상태
     private float direction = 1;
     private bool isRoll = false;
-    private float HP = 3f;
+    public float maxHP = 100f;
+    public float HP; 
+    
     
     // 스킬
     private Skill[] haveSkill = new Skill[5];
@@ -41,6 +50,14 @@ public class Character : MonoBehaviour, TakeDamage
     {
         rbCharacter = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        HP = maxHP;
+
+        // 속도 버프의 기본 속도 저장
+        buffSpeed = speed;
+        buffRunSpeed = runSpeed;
+        
+
+
     }
 
     private void FixedUpdate()
@@ -48,7 +65,7 @@ public class Character : MonoBehaviour, TakeDamage
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         float isRun = Input.GetAxis("Run");
-        float tmpSpeed = isRun > 0 ? runSpeed : speed;
+        float tmpSpeed = isRun > 0 ? runSpeed : speed; // 달리는중인가? 달리면 runSpeed 아니면 speed
 
         animator.SetFloat("RunSpeed", tmpSpeed);
 
@@ -162,5 +179,57 @@ public class Character : MonoBehaviour, TakeDamage
         return haveSkill;
     }
 
+
+
+    /// <summary>
+    /// 체력 아이템을 먹었을때 함수
+    /// </summary>
+    /// <param name="healAmount">회복할 체력양</param>
+    public void upHeal(float healAmount) {
+        HP = Mathf.Min(healAmount + HP , maxHP);
+        Debug.Log($"현재 체력: {HP}/{maxHP}");
+    }
+
+
+
+
+    /// <summary>
+    /// 속도 버프 아이템을 먹었을때 함수
+    /// </summary>
+    /// <param name="upSpeed">증가시킬 속도</param>
+    /// <param name="duration">속도 버프의 지속시간</param>
+    public void ApplySpeedBoost(float upSpeed, float duration)
+    {
+        // 이미 코루틴 돌고 있다면 중지하고 새로 시작
+        if (speedBoostCoroutine != null)
+        {
+            StopCoroutine(speedBoostCoroutine);
+        }
+        speedBoostCoroutine = StartCoroutine(SpeedBoostCoroutine(upSpeed, duration));
+    }
+
+
+    /// <summary>
+    /// 속도 버프 아이템을 먹었을때 코루틴
+    /// </summary>
+    /// <param name="upSpeed">증가시킬 속도</param>
+    /// <param name="duration">속도 버프의 지속시간</param>
+    private System.Collections.IEnumerator SpeedBoostCoroutine(float upSpeed , float duration)
+    {
+        /// 현재 속도에 증가 속도를 곱한다
+        speed *= upSpeed;
+        runSpeed *= upSpeed;
+
+        Debug.Log($"속도 증가! 이동: {speed}, 달리기: {runSpeed}");
+
+        // duration 만큼 지속
+        yield return new WaitForSeconds(duration);
+
+        // 원래 속도로 복원
+        speed = buffSpeed;
+        runSpeed = buffRunSpeed;
+
+        Debug.Log("속도 증가 효과 종료");
+    }
 
 }
