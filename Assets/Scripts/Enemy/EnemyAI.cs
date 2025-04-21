@@ -1,5 +1,4 @@
 using System;
-using TMPro.Examples;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour, EnemyInterface, TakeDamage

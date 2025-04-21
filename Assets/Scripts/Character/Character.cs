@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour, TakeDamage
 {
