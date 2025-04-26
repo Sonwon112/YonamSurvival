@@ -19,7 +19,13 @@ public class Character : MonoBehaviour, TakeDamage
     // 플레이어상태
     private float direction = 1;
     private bool isRoll = false;
+
     private float HP = 3f;
+
+    private int level = 0;
+    private float gauge = 0f;
+    private float maxGauge = 10f;
+    private float gaugeInterval = 20f;
     
     // 스킬
     private Skill[] haveSkill = new Skill[5];
@@ -162,5 +168,27 @@ public class Character : MonoBehaviour, TakeDamage
         return haveSkill;
     }
 
+    /// <summary>
+    /// 레벨 업 시 호출 되는 함수
+    /// </summary>
+    public void LevelUp()
+    {
+        level += 10;
+        GameManager.Instance.DrawSkill();
+    }
+
+    /// <summary>
+    /// 포인트를 획득하였을 때 게이지에 누적, 일정치 이상이 쌓였을때 레벨업 호출
+    /// </summary>
+    /// <param name="point"></param>
+    public void appendPoint(float point)
+    {
+        gauge += point;
+        if(gauge >= maxGauge)
+        {
+            LevelUp();
+            gauge = gauge - maxGauge;
+        }
+    }
 
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool first = true;
     private Skill[] playerSkill;
 
-    public static GameManager Instance = new GameManager();
+    public static GameManager Instance;
 
     private void Awake()
     {
