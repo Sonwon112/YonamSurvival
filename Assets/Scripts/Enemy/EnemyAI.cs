@@ -72,7 +72,7 @@ public class EnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 
     public void takeDamage(float damage)
     {
-        Debug.Log($"기본몹 피해: {damage} / 남은 HP: {HP}");
+        //Debug.Log($"기본몹 피해: {damage} / 남은 HP: {HP}");
         HP -= damage;
         if (HP <= 0)
         {
@@ -87,7 +87,7 @@ public class EnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 
     public void Attack(int atDamage)
     {
-        Debug.Log($"Lv1 기본몹이 {atDamage}의 데미지를 입혔습니다.");
+        //Debug.Log($"Lv1 기본몹이 {atDamage}의 데미지를 입혔습니다.");
     }
 
 

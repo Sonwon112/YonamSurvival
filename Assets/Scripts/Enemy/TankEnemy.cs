@@ -70,11 +70,11 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 
 
         // 공격 준비 시간
-        Debug.Log("탱커 적: 공격 준비 중...");
+        //Debug.Log("탱커 적: 공격 준비 중...");
         yield return new WaitForSeconds(attackDelay);
 
         // 광역 공격 실행
-        Debug.Log("탱커 적: 광역 공격!");
+        //Debug.Log("탱커 적: 광역 공격!");
 
         //Tank 오브젝트의 현재 위치를 중심으로 공격 범위 만큼의 객체 감지
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackRange);
@@ -84,7 +84,7 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
             if (hit.CompareTag("Player"))
             {
                 // 플레이어에게 피해 
-                Debug.Log("플레이어 광역 피해 입음!");
+                //Debug.Log("플레이어 광역 피해 입음!");
                 Attack(40);
 
             }
@@ -101,7 +101,7 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
     public void takeDamage(float damage)
     {
         HP -= damage;
-        Debug.Log($"탱커 피해: {damage} / 남은 HP: {HP}");
+        //Debug.Log($"탱커 피해: {damage} / 남은 HP: {HP}");
 
         if (HP <= 0)
             Die();
@@ -109,13 +109,13 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 
     private void Die()
     {
-        Debug.Log("탱커 사망!");
+        //Debug.Log("탱커 사망!");
         Destroy(gameObject);
     }
 
     public void Attack(int atDamage)
     {
-        Debug.Log($"Lv3 상급몹이 {atDamage}의 데미지를 입혔습니다.");
+        //Debug.Log($"Lv3 상급몹이 {atDamage}의 데미지를 입혔습니다.");
     }
 
     //private void OnDrawGizmosSelected()

@@ -68,12 +68,14 @@ public class Character : MonoBehaviour, TakeDamage
         float absVert = Mathf.Abs(vertical);
 
         float movingSpeed = absHor + absVert > 1.1 ? tmpSpeed * diagonalTmp : tmpSpeed;
-        float vx = horizontal * movingSpeed;
-        float currRollPow = isRoll ? direction * rollPow : 0f;
+
+        Vector2 movingDirection = new Vector2(horizontal,vertical).normalized;
+
+        Vector2 currRollPow = isRoll ? movingDirection*rollPow : Vector2.zero;
 
         //Debug.Log(isRoll);
 
-        rbCharacter.linearVelocity = new Vector2(horizontal * movingSpeed + currRollPow, vertical * movingSpeed);
+        rbCharacter.linearVelocity = new Vector2(horizontal * movingSpeed, vertical * movingSpeed) + currRollPow;
 
         animator.SetFloat("speed", absHor + absVert);
 
@@ -188,7 +190,10 @@ public class Character : MonoBehaviour, TakeDamage
         {
             LevelUp();
             gauge = gauge - maxGauge;
+            maxGauge += gaugeInterval;
         }
+
+        GameManager.Instance.UpdatePointGauge(gauge,maxGauge);
     }
 
 }

@@ -94,7 +94,7 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
     public void takeDamage(float damage)
     {
 
-        Debug.Log($"중간몹 피해: {damage} / 남은 HP: {HP}");
+        //Debug.Log($"중간몹 피해: {damage} / 남은 HP: {HP}");
         HP -= damage;
         if (HP <= 0)
         {
@@ -110,7 +110,7 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
     public void Attack(int atDamage)
     {
         // 충돌 시 데미지 처리
-        Debug.Log($"Lv2 중간몹이 {atDamage}의 데미지를 입혔습니다.");
+        //Debug.Log($"Lv2 중간몹이 {atDamage}의 데미지를 입혔습니다.");
     }
 
 

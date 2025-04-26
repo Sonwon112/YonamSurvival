@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class subjectMath : Skill
+public class subjectDefault : Skill
 {
     [SerializeField] private float throwPow = 5f;
     // 공격을 수행하기 위한 변수
@@ -57,7 +57,8 @@ public class subjectMath : Skill
         GameObject nearEnemy = findNearEnemy();
         if(nearEnemy == null)
         {
-            rb.AddForce(Vector2.right*throwPow, ForceMode2D.Impulse);
+            //rb.AddForce(Vector2.right*throwPow, ForceMode2D.Impulse);
+            Destroy(effect);
         }
         else
         {

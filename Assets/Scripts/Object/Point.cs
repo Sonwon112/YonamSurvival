@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 {
-    private float level = 1f;
+    [SerializeField]private float point = 1f;
     private SpriteRenderer spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,11 +17,23 @@ public class Point : MonoBehaviour
     }
 
 
-    public void setLevel(float level){this.level = level;}
-    public float getLevel(){ return level; }
+    public void setPoint(float point) {this.point = point; }
+    public float getPoint(){ return point; }
     public void setSprite(Sprite pointImage)
     {
         spriteRenderer.sprite = pointImage;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log(collision.tag);
+        if (collision.tag.Equals("Point"))
+        {
+            Character character = collision.GetComponentInParent<Character>();
+            character?.appendPoint(point);
+            // 효과음 출력 필요
+            Destroy(gameObject);
+        }
     }
 
 }

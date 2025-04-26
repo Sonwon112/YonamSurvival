@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Interactable
   - Point
+  - Map
+  - Boundary
   layers:
   - Default
   - TransparentFX
