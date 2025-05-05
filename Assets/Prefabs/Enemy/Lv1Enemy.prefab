@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3227161669728738513}
   - component: {fileID: 7871314370969097845}
   - component: {fileID: 60039975919406165}
+  - component: {fileID: 3535509318790047049}
+  - component: {fileID: -8013128112052178669}
   m_Layer: 6
   m_Name: Lv1Enemy
   m_TagString: Enemy
@@ -152,7 +154,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.6603813
 --- !u!114 &60039975919406165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,4 +167,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98178cc31a1eb6049b9049d14232f509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 30
+  maxPoint: 30
   moveSpeed: 0.7
+  damage: 5
+--- !u!114 &3535509318790047049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075575892373273119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f9cf0596500f4fb3682e4ecd0dc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSprites:
+  - {fileID: 21300000, guid: 946a8f927ed234d4881800b0ffd81ddd, type: 3}
+  - {fileID: 21300000, guid: 2c461729a727ed24fa7773031c7b0142, type: 3}
+  pointObject: {fileID: 4475602730244262754, guid: 62fcd69dacb05d0429f0f88a3d9a21f3, type: 3}
+  oneTimeMaxPoint: 5
+--- !u!114 &-8013128112052178669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075575892373273119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680d78781464eb44fad0d681d6341d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  isThrowable: 0

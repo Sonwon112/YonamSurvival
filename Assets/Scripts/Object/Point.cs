@@ -1,23 +1,22 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Point : MonoBehaviour
 {
-    [SerializeField]private float point = 1f;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private float point = 1f;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        //spriteRenderer = GetComponent<SpriteRenderer>();   
     }
 
 
-    public void setPoint(float point) {this.point = point; }
+    public void setPoint(float point) {
+        this.point = point;
+        int direction = Random.Range(0,2) == 0 ? 1 : -1;
+        transform.localScale.Set(Map(point, 1f, 5f, 0.5f, 1.2f)* direction, Map(point, 1f, 5f, 0.5f, 1.2f), Map(point, 1f, 5f, 0.5f, 1.2f));
+    }
     public float getPoint(){ return point; }
     public void setSprite(Sprite pointImage)
     {
@@ -32,8 +31,13 @@ public class Point : MonoBehaviour
             Character character = collision.GetComponentInParent<Character>();
             character?.appendPoint(point);
             // 효과음 출력 필요
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
+    private float Map(float value, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        float normalized = (value - fromMin) / (fromMax - fromMin);
+        return toMin + normalized * (toMax - toMin);
+    }
 }

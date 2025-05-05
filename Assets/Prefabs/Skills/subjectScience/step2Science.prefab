@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  isThrowable: 1
 --- !u!95 &1159515266097341707
 Animator:
   serializedVersion: 7

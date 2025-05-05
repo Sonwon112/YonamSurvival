@@ -13,7 +13,6 @@ public class subjectDefault : Skill
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -47,7 +46,7 @@ public class subjectDefault : Skill
 
     public override void Attack()
     {
-        Debug.Log("수학 연산자 공격");
+       
         GameObject effect = Instantiate(stepEffects[step], transform.position, Quaternion.identity);
         Rigidbody2D rb = effect.GetComponent<Rigidbody2D>();
         DamageComponet damageComponet = effect.GetComponent<DamageComponet>();
@@ -63,7 +62,7 @@ public class subjectDefault : Skill
         else
         {
             Vector3 direction = (nearEnemy.transform.position - transform.position).normalized;
-            Debug.Log(direction);
+            //Debug.Log(direction);
             rb.AddForce(new Vector2(direction.x, direction.y) * throwPow, ForceMode2D.Impulse);
         }
 

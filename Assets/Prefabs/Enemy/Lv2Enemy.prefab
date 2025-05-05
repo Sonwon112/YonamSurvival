@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 501343278433378105}
   - component: {fileID: 7143493589823134870}
   - component: {fileID: 6585034920505841373}
+  - component: {fileID: 6627219407006935500}
+  - component: {fileID: -6293443258556307642}
   m_Layer: 6
   m_Name: Lv2Enemy
   m_TagString: Enemy
@@ -165,9 +167,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f118b27e39ae8499ee75df7373d6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 20
+  maxPoint: 50
   moveSpeed: 1
   randomness: 0.3
   detectionRange: 5
   chargeForce: 4
   chargeDuration: 0.5
   chargeCooldown: 4
+--- !u!114 &6627219407006935500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953805199881402883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965f9cf0596500f4fb3682e4ecd0dc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSprites:
+  - {fileID: 21300000, guid: 946a8f927ed234d4881800b0ffd81ddd, type: 3}
+  - {fileID: 21300000, guid: 2c461729a727ed24fa7773031c7b0142, type: 3}
+  pointObject: {fileID: 4475602730244262754, guid: 62fcd69dacb05d0429f0f88a3d9a21f3, type: 3}
+  oneTimeMaxPoint: 5
+--- !u!114 &-6293443258556307642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2953805199881402883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680d78781464eb44fad0d681d6341d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

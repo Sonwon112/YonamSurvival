@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  isThrowable: 0
 --- !u!1 &6917157047447996150
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  isThrowable: 1
 --- !u!95 &1226668464779889498
 Animator:
   serializedVersion: 7

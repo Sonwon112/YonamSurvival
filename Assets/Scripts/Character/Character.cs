@@ -20,7 +20,8 @@ public class Character : MonoBehaviour, TakeDamage
     private float direction = 1;
     private bool isRoll = false;
 
-    private float HP = 3f;
+    private float maxHP = 100f;
+    private float HP = 100f;
 
     private int level = 0;
     private float gauge = 0f;
@@ -141,11 +142,13 @@ public class Character : MonoBehaviour, TakeDamage
     /// <param name="damage"></param>
     public void takeDamage(float damage)
     {
+        //Debug.Log("Get Damage : " + damage);
         HP -= damage;
+        GameManager.Instance.UpdateHPGuage(HP, maxHP);
         if (HP < 0)
         {
             HP = 0;
-            die();
+            Die();
         }
         
     }
@@ -153,9 +156,10 @@ public class Character : MonoBehaviour, TakeDamage
     /// <summary>
     /// HP가 0이 되었을 때 호출
     /// </summary>
-    public void die()
+    public void Die()
     {
-
+        // Die Animation
+        GameManager.Instance.GameOver();
     }
 
     public Skill[] AppendSkill(Skill skill)
@@ -185,7 +189,7 @@ public class Character : MonoBehaviour, TakeDamage
     /// <param name="point"></param>
     public void appendPoint(float point)
     {
-        gauge += point;
+         gauge += point;
         if(gauge >= maxGauge)
         {
             LevelUp();

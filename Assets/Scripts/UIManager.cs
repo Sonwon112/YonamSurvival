@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
     private const float GUAGE_UI_MIN = 60;
     private const float GUAGE_UI_MAX = 1900;
 
+    private const float HP_UI_MIN = 0;
+    private const float HP_UI_MAX = 1920;
+
     [Header("SkillCard")]
     [SerializeField] private SkillCard[] skillCards;
 
@@ -14,6 +17,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private TMP_Text timerText;
+
+    [Header("HP")]
+    [SerializeField] private RectTransform HPBar;
 
     private Animator uiAnimator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,12 +39,18 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// 스킬 카드를 표시하는 함수
     /// </summary>
-    public void ShowCard(){uiAnimator.SetBool("showCard", true);}
+    public void ShowCard(){ uiAnimator.SetBool("showCard", true); }
 
     /// <summary>
     /// 스킬 카드를 숨기는 함수
     /// </summary>
-    public void HideCard(){uiAnimator.SetBool("showCard", false);}
+    public void HideCard(){ uiAnimator.SetBool("showCard", false); }
+
+    /// <summary>
+    /// 게임 오버시 게임오버 화면을 보여주는 함수
+    /// </summary>
+    public void GameOver() { uiAnimator.SetBool("showGameOver", true); }
+
 
     /// <summary>
     /// 스킬 카드가 숨기는게 완료되었을때 애니메이션에서 호출하는 함수
@@ -56,6 +68,14 @@ public class UIManager : MonoBehaviour
         Vector2 currSize = GaugeBar.sizeDelta;
         currSize.x = result;
         GaugeBar.sizeDelta = currSize;
+    }
+
+    public void UpdateHPGuage(float currHP, float maxHP)
+    {
+        float result = Map(currHP, 0, maxHP, HP_UI_MIN, HP_UI_MAX);
+        Vector2 currSize = HPBar.sizeDelta;
+        currSize.x = result;
+        HPBar.sizeDelta = currSize;
     }
 
     /// <summary>

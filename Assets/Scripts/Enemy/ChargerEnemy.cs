@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 {
-    public float HP { get; set; }
+    [SerializeField] public float HP;
+    [SerializeField] private float maxPoint;
     public float MoveSpeed { get; set; }
 
     [Header("기본 이동 설정")]
@@ -20,15 +21,19 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
     private bool isCharging = false;
     private float chargeTimer = 0f;
     private Rigidbody2D rb;
+    private DamageComponet damgeComp;
 
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
         MoveSpeed = moveSpeed;
-        HP = 100;
+        //HP = 100;
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating(nameof(UpdateRandomOffset), 0f, 0.3f);
+        damgeComp = GetComponent<DamageComponet>();
+        damgeComp.setDamage(5);
+        damgeComp.setTarget("Player");
     }
 
     void Update()
@@ -79,6 +84,7 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
         Vector2 direction = (playerTransform.position - transform.position).normalized;
         rb.linearVelocity = direction * chargeForce;
 
+        damgeComp.setDamage(20);
         // 일정 시간 후 돌진 종료
         Invoke(nameof(EndCharge), chargeDuration);
     }
@@ -89,6 +95,7 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
     {
         isCharging = false;
         rb.linearVelocity = Vector2.zero;
+        damgeComp.setDamage(5);
     }
 
     public void takeDamage(float damage)
@@ -104,30 +111,16 @@ public class ChargingEnemyAI : MonoBehaviour, EnemyInterface, TakeDamage
 
     private void Die()
     {
+        float point = UnityEngine.Random.Range(1, maxPoint) / 10f;
+        GetComponent<SpawnPoint>().spawnPoint(point);
         Destroy(gameObject);
     }
 
-    public void Attack(int atDamage)
+    public void Attack(int atDamage, GameObject target)
     {
         // 충돌 시 데미지 처리
         //Debug.Log($"Lv2 중간몹이 {atDamage}의 데미지를 입혔습니다.");
     }
-
-
-    // 돌진 스킬에 충돌했을때 데미지
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (isCharging)
-        {
-            Attack(20);
-        }
-        else 
-        {
-            Attack(5);
-        }
-       
-    }
-
    
 
 
