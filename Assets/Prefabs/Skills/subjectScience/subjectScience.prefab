@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6581597033788403282
+--- !u!1 &1096060749740271816
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1764569639615279973}
-  - component: {fileID: 1851482602185780871}
+  - component: {fileID: 3130259368249829192}
+  - component: {fileID: 2531053948037100195}
   m_Layer: 0
-  m_Name: subjectMath
+  m_Name: subjectScience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1764569639615279973
+--- !u!4 &3130259368249829192
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6581597033788403282}
+  m_GameObject: {fileID: 1096060749740271816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,32 +32,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1851482602185780871
+--- !u!114 &2531053948037100195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6581597033788403282}
+  m_GameObject: {fileID: 1096060749740271816}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d59e70e63dddd64e80d842a4f925309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillId: 1
+  skillId: 4
   stepEffects:
-  - {fileID: 9100791713643600770, guid: 02131efa9c8ab024095bd35d4aff69e7, type: 3}
-  - {fileID: 6596994688967133525, guid: 44c00aaf9ac8e344fa0e544bd6523a0d, type: 3}
-  - {fileID: 6917157047447996150, guid: b01e753c9ca4d7b45bd9f54fb7d178a1, type: 3}
+  - {fileID: 7394324538477186413, guid: 8a968d09212e68741b8a4dfd7956927c, type: 3}
+  - {fileID: 6900650832690439091, guid: 4555c41ac42564c4d87d794c2ac6719b, type: 3}
+  - {fileID: 4521283250696564265, guid: 9a0290d62fc9bc84c96c447886ae525e, type: 3}
   stepDamage:
+  - 10
+  - 20
   - 30
-  - 50
-  - 100
   stepTerm:
   - 3
   - 3
   - 3
-  skillProfile: {fileID: 21300000, guid: 13ec8a5c99d9d2a44864b4ae97e59191, type: 3}
-  skillDescript: "\uC218\uD559 \uACF5\uC2DD\uC744 \uC774\uC6A9\uD55C \uACF5\uACA9"
+  skillProfile: {fileID: 21300000, guid: f17058fc1015c7c4eadb6b124e45ec27, type: 3}
+  skillDescript: "\uACFC\uD559\uC744 \uC774\uC6A9\uD55C \uACF5\uACA9"
   step: 0
   throwPow: 5
