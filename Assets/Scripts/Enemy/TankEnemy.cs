@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 {
-    public float HP { get; set; }
+    [SerializeField] public float HP = 100;
+    [SerializeField] private float maxPoint;
     public float MoveSpeed { get; set; }
 
     [Header("탱커 설정")]
     public float moveSpeed = 0.6f;
-    public int maxHP = 300;
+    //public int maxHP = 300;
     public float attackRange = 1.5f; // 공격 범위
     public float attackDelay = 1.0f; // 공격 전 대기시간
     public float attackCooldown = 2.0f; // 공격후 쿨타임
@@ -16,14 +17,18 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
     private Transform playerTransform;
     private Rigidbody2D myRigid;
     private bool isAttacking = false; // 공격 중인지 아닌지 판단하는 bool 변수
+    private DamageComponet damgeComp;
 
     private void Start()
     {
         myRigid = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        HP = maxHP;
+        //HP = maxHP;
         MoveSpeed = moveSpeed;
+        damgeComp = GetComponent<DamageComponet>();
+        damgeComp.setDamage(10);
+        damgeComp.setTarget("Player");
     }
 
 
@@ -70,11 +75,11 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 
 
         // 공격 준비 시간
-        Debug.Log("탱커 적: 공격 준비 중...");
+        //Debug.Log("탱커 적: 공격 준비 중...");
         yield return new WaitForSeconds(attackDelay);
 
         // 광역 공격 실행
-        Debug.Log("탱커 적: 광역 공격!");
+        //Debug.Log("탱커 적: 광역 공격!");
 
         //Tank 오브젝트의 현재 위치를 중심으로 공격 범위 만큼의 객체 감지
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackRange);
@@ -84,8 +89,8 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
             if (hit.CompareTag("Player"))
             {
                 // 플레이어에게 피해 
-                Debug.Log("플레이어 광역 피해 입음!");
-                Attack(40);
+                //Debug.Log("플레이어 광역 피해 입음!");
+                Attack(40,hit.gameObject);
 
             }
 
@@ -101,7 +106,7 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
     public void takeDamage(float damage)
     {
         HP -= damage;
-        Debug.Log($"탱커 피해: {damage} / 남은 HP: {HP}");
+        //Debug.Log($"탱커 피해: {damage} / 남은 HP: {HP}");
 
         if (HP <= 0)
             Die();
@@ -109,13 +114,18 @@ public class TankEnemy : MonoBehaviour, EnemyInterface, TakeDamage
 
     private void Die()
     {
-        Debug.Log("탱커 사망!");
+        float point = UnityEngine.Random.Range(1, maxPoint) / 10f;
+        GetComponent<SpawnPoint>().spawnPoint(point);
+        //Debug.Log("탱커 사망!");
         Destroy(gameObject);
     }
 
-    public void Attack(int atDamage)
+    public void Attack(int atDamage, GameObject target)
     {
-        Debug.Log($"Lv3 상급몹이 {atDamage}의 데미지를 입혔습니다.");
+        TakeDamage targetComp = target.GetComponent<TakeDamage>();
+        targetComp.takeDamage(atDamage);
+        //Debug.Log($"Lv3 상급몹이 {atDamage}의 데미지를 입혔습니다.");
+        
     }
 
     //private void OnDrawGizmosSelected()

@@ -1,8 +1,7 @@
-using NUnit.Framework;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class subjectMath : Skill
+public class subjectDefault : Skill
 {
     [SerializeField] private float throwPow = 5f;
     // 공격을 수행하기 위한 변수
@@ -14,7 +13,6 @@ public class subjectMath : Skill
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -48,7 +46,7 @@ public class subjectMath : Skill
 
     public override void Attack()
     {
-        Debug.Log("수학 연산자 공격");
+       
         GameObject effect = Instantiate(stepEffects[step], transform.position, Quaternion.identity);
         Rigidbody2D rb = effect.GetComponent<Rigidbody2D>();
         DamageComponet damageComponet = effect.GetComponent<DamageComponet>();
@@ -58,12 +56,13 @@ public class subjectMath : Skill
         GameObject nearEnemy = findNearEnemy();
         if(nearEnemy == null)
         {
-            rb.AddForce(Vector2.right*throwPow, ForceMode2D.Impulse);
+            //rb.AddForce(Vector2.right*throwPow, ForceMode2D.Impulse);
+            Destroy(effect);
         }
         else
         {
             Vector3 direction = (nearEnemy.transform.position - transform.position).normalized;
-            Debug.Log(direction);
+            //Debug.Log(direction);
             rb.AddForce(new Vector2(direction.x, direction.y) * throwPow, ForceMode2D.Impulse);
         }
 

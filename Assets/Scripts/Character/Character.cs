@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour, TakeDamage
 {
@@ -19,7 +19,14 @@ public class Character : MonoBehaviour, TakeDamage
     // 플레이어상태
     private float direction = 1;
     private bool isRoll = false;
-    private float HP = 3f;
+
+    private float maxHP = 100f;
+    private float HP = 100f;
+
+    private int level = 0;
+    private float gauge = 0f;
+    private float maxGauge = 10f;
+    private float gaugeInterval = 20f;
     
     // 스킬
     private Skill[] haveSkill = new Skill[5];
@@ -62,12 +69,14 @@ public class Character : MonoBehaviour, TakeDamage
         float absVert = Mathf.Abs(vertical);
 
         float movingSpeed = absHor + absVert > 1.1 ? tmpSpeed * diagonalTmp : tmpSpeed;
-        float vx = horizontal * movingSpeed;
-        float currRollPow = isRoll ? direction * rollPow : 0f;
+
+        Vector2 movingDirection = new Vector2(horizontal,vertical).normalized;
+
+        Vector2 currRollPow = isRoll ? movingDirection*rollPow : Vector2.zero;
 
         //Debug.Log(isRoll);
 
-        rbCharacter.linearVelocity = new Vector2(horizontal * movingSpeed + currRollPow, vertical * movingSpeed);
+        rbCharacter.linearVelocity = new Vector2(horizontal * movingSpeed, vertical * movingSpeed) + currRollPow;
 
         animator.SetFloat("speed", absHor + absVert);
 
@@ -133,11 +142,13 @@ public class Character : MonoBehaviour, TakeDamage
     /// <param name="damage"></param>
     public void takeDamage(float damage)
     {
+        //Debug.Log("Get Damage : " + damage);
         HP -= damage;
+        GameManager.Instance.UpdateHPGuage(HP, maxHP);
         if (HP < 0)
         {
             HP = 0;
-            die();
+            Die();
         }
         
     }
@@ -145,9 +156,10 @@ public class Character : MonoBehaviour, TakeDamage
     /// <summary>
     /// HP가 0이 되었을 때 호출
     /// </summary>
-    public void die()
+    public void Die()
     {
-
+        // Die Animation
+        GameManager.Instance.GameOver();
     }
 
     public Skill[] AppendSkill(Skill skill)
@@ -162,5 +174,30 @@ public class Character : MonoBehaviour, TakeDamage
         return haveSkill;
     }
 
+    /// <summary>
+    /// 레벨 업 시 호출 되는 함수
+    /// </summary>
+    public void LevelUp()
+    {
+        level += 10;
+        GameManager.Instance.DrawSkill();
+    }
+
+    /// <summary>
+    /// 포인트를 획득하였을 때 게이지에 누적, 일정치 이상이 쌓였을때 레벨업 호출
+    /// </summary>
+    /// <param name="point"></param>
+    public void appendPoint(float point)
+    {
+         gauge += point;
+        if(gauge >= maxGauge)
+        {
+            LevelUp();
+            gauge = gauge - maxGauge;
+            maxGauge += gaugeInterval;
+        }
+
+        GameManager.Instance.UpdatePointGauge(gauge,maxGauge);
+    }
 
 }
