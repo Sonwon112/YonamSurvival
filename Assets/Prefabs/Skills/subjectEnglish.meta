@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UI/Anim/HideCard.anim.meta
+guid: a919afdc50347db47811e9c737bbf819
+NativeFormatImporter:
+=======
 guid: fa56506a0dfef544d9e0b5aa2bbc4fdc
 folderAsset: yes
 DefaultImporter:
+>>>>>>> origin/develop:Assets/Prefabs/Skills/subjectEnglish.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

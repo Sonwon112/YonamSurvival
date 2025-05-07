@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UI/Anim/Idle.anim.meta
+guid: e44e7779d8ccbb248ac7044dec46ffeb
+NativeFormatImporter:
+=======
 guid: e616a5958584c34459fbf42b3ad6d619
 folderAsset: yes
 DefaultImporter:
+>>>>>>> origin/develop:Assets/Prefabs/Skills/subjectKorean.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

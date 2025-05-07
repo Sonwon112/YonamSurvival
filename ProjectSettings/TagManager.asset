@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Interactable
+  - Item
   - Point
   - Map
   - Boundary
+
   layers:
   - Default
   - TransparentFX
